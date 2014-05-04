@@ -1,0 +1,43 @@
+{
+    "name":"jcowie/magento_tracking",
+    "type":"magento-module",
+    "license":"OSL-3.0",
+    "homepage":"https://github.com/jamescowie/MagentoTracking",
+    "description":"Magento module enabling tracking code to be set via the adminhtml configuration",
+    "version" : "1.0.0",
+    "authors":[
+        {
+            "name":"James Cowie",
+            "email":"james@jcowie.co.uk"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    },
+    "require-dev": {
+        "magetest/magento-phpspec-extension": "*",
+        "magetest/magento": "dev-master"
+    },
+    "extra" : {
+        "map": [
+            ["app/etc/modules/Jcowie_Tracking.xml" , "app/etc/modules/Jcowie_Tracking.xml"],
+            ["app/code/local/Jcowie/Tracking","app/code/local/Jcowie/Tracking"],
+            ["app/design/base/default/template/jcowie/tracking","app/design/base/default/template/jcowie/tracking"]
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "": [
+                "vendor/app",
+                "vendor/app/code/local",
+                "vendor/app/code/community",
+                "vendor/app/code/core",
+                "vendor/lib"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
