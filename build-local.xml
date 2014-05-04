@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="project" default="build" basedir=".">
+	<property name="source" value="app"/>
+	<property environment="env" />
+	<property name="project" value="code/local/Jcowie/Tracking" /> <!-- Replace value with project source -->
+
+	<!-- Install project dependencies -->
+	<target name="composer" description="Ensure composer dependencies are up to date">
+		<delete dir="${basedir}/vendor" />
+		<exec executable="php" failonerror="false">
+			<arg value="-r" />
+			<arg value="eval('?>'.file_get_contents('https://getcomposer.org/installer'));" />
+		</exec>
+		<exec executable="php" failonerror="false">
+			<arg value="composer.phar" />
+			<arg value="install" />
+			<arg value="--dev" />
+		</exec>
+	</target>
+	
+	<!-- Run PHP Lint on source files -->
+	<target name="checkphp">
+	    <apply executable="php" failonerror="false">
+	      <arg value="-l" />
+	      <fileset dir="${source}/${project}">
+	        <include name="**/*.php" />
+	      </fileset>
+	    </apply>
+	  </target>
+	
+	<!-- Run Code Sniffer on the project -->
+	<target name="phpcs" description="Generate checkstyle.xml using PHP_CodeSniffer">
+		<exec executable="${basedir}/bin/phpcs" failonerror="false">
+			<arg value="--standard=${basedir}/rules/phpcs.xml" />
+			<arg path="${source}/${project}" />
+		</exec>
+	</target>
+	
+	<!-- Lines of code -->
+	<target name="phploc" description="Generate phploc.csv">
+		<exec executable="${basedir}/bin/phploc" failonerror="false">
+			<arg path="${source}/${project}" />
+		</exec>
+	</target>
+	
+	<!-- PHPMess detectore -->
+	<target name="phpmd" description="Generate pmd.xml using PHPMD">
+		<exec executable="${basedir}/bin/phpmd" failonerror="false">
+			<arg path="${source}/${project}" />
+			<arg value="text" />
+			<arg value="rules/phpmd.xml" />
+		</exec>
+	</target>
+
+	<!-- PHPCPD detector -->
+	<target name="phpcpd" description="Generate pmd-cpd.xml using PHPCPD">
+		<exec executable="${basedir}/bin/phpcpd" failonerror="false">
+			<arg path="${source}/${project}" />
+		</exec>
+	</target>
+ 
+ 	<!-- Generic build task -->
+	<target name="build" depends="composer" />
+	
+	<!-- commit task -->
+	<target name="commit" depends="checkphp, phpcs, phpmd, phpcpd" />
+
+</project>
