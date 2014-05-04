@@ -32,7 +32,7 @@
         "psr-0": {
             "": [
                 "vendor/app",
-                "vendor/app/code/local",
+                "app/code/local",
                 "vendor/app/code/community",
                 "vendor/app/code/core",
                 "vendor/lib"

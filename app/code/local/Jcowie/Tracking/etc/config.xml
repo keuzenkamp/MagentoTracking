@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jcowie_Tracking>
+            <version>0.1.0</version>
+        </Jcowie_Tracking>
+    </modules>
+
+</config>
