@@ -16,7 +16,13 @@
     },
     "require-dev": {
         "magetest/magento-phpspec-extension": "*",
-        "magetest/magento": "dev-master"
+        "magetest/magento": "dev-master",
+        "squizlabs/php_codesniffer": "1.*",
+        "phpmd/phpmd": "2.0.0.*@dev",
+        "phpdocumentor/phpdocumentor":"*",
+        "phploc/phploc": "*",
+        "sebastian/phpcpd": "*",
+        "sebastian/phpdcd": "*"
     },
     "extra" : {
         "map": [
